@@ -6,7 +6,8 @@ import {
   deleteRoom,
   updateRoom,
   updateRoomAvailability,
-  getRoomById
+  getRoomById,
+  getAllRooms
 } from "./room.service";
 
 export const createRoomHandler = async (
@@ -70,19 +71,19 @@ export async function getRoomHandler(req: Request, res: Response) {
     if (!room) {
       return res.status(StatusCodes.NOT_FOUND).send("room not found.");
     }
-    return res.status(StatusCodes.OK).send(room);
+    return res.status(StatusCodes.OK).json(room);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
 }
 
-export async function getAllHotelsHandler(req: Request, res: Response) {
+export async function getAllRoomsHandler(req: Request, res: Response) {
   try {
-    const hotels = await getAllHotels();
-    if (!hotels) {
-      return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
+    const rooms = await getAllRooms();
+    if (!rooms) {
+      return res.status(StatusCodes.NOT_FOUND).send("Rooms not found.");
     }
-    return res.status(StatusCodes.OK).json(hotels);
+    return res.status(StatusCodes.OK).json(rooms);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }

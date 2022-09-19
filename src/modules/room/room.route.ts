@@ -8,6 +8,7 @@ import {
   getRoomHandler,
   updateRoomAvailabilityHandler,
   updateRoomHandler,
+  getAllRoomsHandler,
 } from "./room.controller";
 
 const router = express.Router();
