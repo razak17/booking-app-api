@@ -15,9 +15,6 @@ export const createHotelSchema = {
     rooms: string({ required_error: "distance is required" }).array(),
     featured: boolean({ required_error: "featured is required" }),
   }),
-  params: object({
-    userId: string(),
-  }),
 };
-export type createHotelBody = TypeOf<typeof createHotelSchema.body>;
 
+export type createHotelBody = TypeOf<typeof createHotelSchema.body>;
