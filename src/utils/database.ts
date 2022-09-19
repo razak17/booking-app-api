@@ -16,4 +16,3 @@ export async function disconnectFromDatabase() {
   logger.info("Disconnect from database");
   return;
 }
-

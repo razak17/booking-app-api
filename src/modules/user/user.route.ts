@@ -1,8 +1,13 @@
 import express from "express";
-import requireAdmin from "src/middleware/requireAdmin";
-import requireUser from "src/middleware/requireUser";
+import requireAdmin from "../../middleware/requireAdmin";
+import requireUser from "../../middleware/requireUser";
 import { processRequestBody } from "zod-express-middleware";
-import { deleteUserHandler, getAllUsersHandler, getUserHandler, updateUserHandler } from "./user.controller";
+import {
+  deleteUserHandler,
+  getAllUsersHandler,
+  getUserHandler,
+  updateUserHandler,
+} from "./user.controller";
 import { updateUserSchema } from "./user.schema";
 
 const router = express.Router();
@@ -13,7 +18,8 @@ router.get("/me", (_, res) => {
 });
 
 // Update user
-router.put("/:id",
+router.put(
+  "/:id",
   processRequestBody(updateUserSchema.body),
   requireUser,
   updateUserHandler
@@ -27,7 +33,5 @@ router.get("/:id", requireUser, getUserHandler);
 
 // Get all users
 router.get("/", requireAdmin, getAllUsersHandler);
-
-
 
 export default router;

@@ -22,10 +22,9 @@ const main = async () => {
     })
   );
 
-  app.get('/api/v1/health',  (req, res) => {
-    res.send({ status: 'ok' });
-  })
-
+  app.get("/api/v1/health", (req, res) => {
+    res.send({ status: "ok" });
+  });
 
   app.use(deserializeUser);
   app.use("/api/v1/users", userRoute);

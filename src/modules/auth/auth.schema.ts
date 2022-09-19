@@ -50,6 +50,5 @@ export const registerSchema = {
   }),
 };
 
-
 export type LoginBody = TypeOf<typeof loginSchema.body>;
 export type RegisterUserBody = TypeOf<typeof registerSchema.body>;

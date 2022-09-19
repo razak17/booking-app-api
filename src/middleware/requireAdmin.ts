@@ -11,5 +11,4 @@ function requireAdmin(_: Request, res: Response, next: NextFunction) {
   return next();
 }
 
-
 export default requireAdmin;
