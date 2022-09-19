@@ -8,6 +8,7 @@ import {
   getHotelById,
   getHotelCountByCity,
   getHotelCountByType,
+  getHotelRooms,
   updateHotel,
 } from "./hotel.service";
 
@@ -95,6 +96,19 @@ export async function hotelsCountByTypeHandler(req: Request, res: Response) {
       return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
     }
     return res.status(StatusCodes.OK).json(hotels);
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  }
+}
+
+export async function hotelRoomsHandler(req: Request, res: Response) {
+  const { hotelId } = req.params;
+  try {
+    const hotelRooms = await getHotelRooms(hotelId);
+    if (!hotelRooms) {
+      return res.status(StatusCodes.NOT_FOUND).send("Hotel rooms not found.");
+    }
+    return res.status(StatusCodes.OK).json(hotelRooms);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }

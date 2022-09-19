@@ -6,6 +6,7 @@ import {
   deleteHotelHandler,
   getAllHotelsHandler,
   getHotelHandler,
+  hotelRoomsHandler,
   hotelsCountByCityHandler,
   hotelsCountByTypeHandler,
   updateHotelHandler,
@@ -37,6 +38,6 @@ router.get("/", getAllHotelsHandler);
 //Filter
 router.get("/countByCity", hotelsCountByCityHandler);
 router.get("/countByType", hotelsCountByTypeHandler);
-// router.get("/room/:hotelId", hotelRoomsHandler);
+router.get("/room/:hotelId", hotelRoomsHandler);
 
 export default router;

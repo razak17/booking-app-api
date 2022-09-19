@@ -1,3 +1,4 @@
+import { RoomModel } from "../room/room.model";
 import { Hotel, HotelModel } from "./hotel.model";
 
 export const createHotel = (hotel: Hotel) => {
@@ -52,4 +53,16 @@ export async function getHotelCountByType() {
   ];
 }
 
-export async function getHotelRooms() {}
+export async function getHotelRooms(hotelId: string) {
+    const hotel = await HotelModel.findById(hotelId);
+
+  if (hotel) {
+    const list = await Promise.all(
+      hotel.rooms.map((room) => {
+        return RoomModel.findById(room);
+      })
+    );
+
+  return list;
+  }
+}
