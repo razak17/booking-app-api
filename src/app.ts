@@ -7,6 +7,7 @@ dotenv.config();
 
 import userRoute from "./modules/user/user.route";
 import authRoute from "./modules/auth/auth.route";
+import deserializeUser from "./middleware/deserializeUser";
 
 const main = async () => {
   const port = process.env.PORT;
@@ -25,6 +26,8 @@ const main = async () => {
     res.send({ status: 'ok' });
   })
 
+
+  app.use(deserializeUser);
   app.use("/api/v1/users", userRoute);
   app.use("/api/v1/auth", authRoute);
 

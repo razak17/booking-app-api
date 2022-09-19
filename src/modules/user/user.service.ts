@@ -7,3 +7,12 @@ export async function createUser(user: User) {
 export async function findUserByEmail(email: User["email"]) {
   return UserModel.findOne({ email });
 }
+
+export async function updateUser(
+  userId: string,
+  update: object,
+  options: object
+) {
+  return UserModel.findByIdAndUpdate(userId, { $set: update }, options);
+}
+
