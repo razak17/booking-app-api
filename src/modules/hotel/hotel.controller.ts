@@ -87,3 +87,15 @@ export async function hotelsCountByCityHandler(req: Request, res: Response) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
 }
+
+export async function hotelsCountByTypeHandler(req: Request, res: Response) {
+  try {
+    const hotels = await getHotelCountByType();
+    if (!hotels) {
+      return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
+    }
+    return res.status(StatusCodes.OK).json(hotels);
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  }
+}

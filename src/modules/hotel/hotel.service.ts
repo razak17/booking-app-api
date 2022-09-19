@@ -35,3 +35,19 @@ export async function getHotelCountByCity(cities: string) {
 
   return list;
 }
+
+export async function getHotelCountByType() {
+    const hotelCount = await HotelModel.countDocuments({ type: "hotel" });
+    const apartmentCount = await HotelModel.countDocuments({ type: "apartment" });
+    const resortCount = await HotelModel.countDocuments({ type: "resort" });
+    const villaCount = await HotelModel.countDocuments({ type: "villa" });
+    const cabinCount = await HotelModel.countDocuments({ type: "cabin" });
+
+  return [
+      { type: "hotel", count: hotelCount },
+      { type: "apartments", count: apartmentCount },
+      { type: "resorts", count: resortCount },
+      { type: "villas", count: villaCount },
+      { type: "cabins", count: cabinCount },
+    ]
+}
