@@ -3,7 +3,7 @@ import { Room, RoomModel } from "./room.model";
 
 export const createRoom = async (room: Room, hotelId: string) => {
   const newRoom = new RoomModel(room);
-    const savedRoom = await newRoom.save();
+  const savedRoom = await newRoom.save();
 
   return await HotelModel.findByIdAndUpdate(hotelId, {
     $push: { rooms: savedRoom._id },

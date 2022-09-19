@@ -1,7 +1,9 @@
 import { User, UserModel } from "./user.model";
 
 export async function createUser(user: User) {
-  return UserModel.create(user);
+  const newUser = new UserModel(user);
+  const savedUser = await newUser.save();
+  return savedUser;
 }
 
 export async function findUserByEmail(email: User["email"]) {
