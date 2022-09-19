@@ -7,6 +7,7 @@ import {
   getAllHotels,
   getHotelById,
   getHotelCountByCity,
+  getHotelCountByType,
   updateHotel,
 } from "./hotel.service";
 
@@ -74,8 +75,10 @@ export async function getAllHotelsHandler(req: Request, res: Response) {
 }
 
 export async function hotelsCountByCityHandler(req: Request, res: Response) {
+  const cities = req.query.cities;
+
   try {
-    const hotels = await getHotelCountByCity();
+    const hotels = await getHotelCountByCity(cities as string);
     if (!hotels) {
       return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
     }

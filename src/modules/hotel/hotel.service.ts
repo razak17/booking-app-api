@@ -24,18 +24,14 @@ export async function getAllHotels() {
   return HotelModel.find();
 }
 
-export async function getHotelCountByCity() {
-    const hotelCount = await HotelModel.countDocuments({ type: "hotel" });
-    const apartmentCount = await HotelModel.countDocuments({ type: "apartment" });
-    const resortCount = await HotelModel.countDocuments({ type: "resort" });
-    const villaCount = await HotelModel.countDocuments({ type: "villa" });
-    const cabinCount = await HotelModel.countDocuments({ type: "cabin" });
+export async function getHotelCountByCity(cities: string) {
+  const params = cities.split(",");
 
-  return [
-      { type: "hotel", count: hotelCount },
-      { type: "apartments", count: apartmentCount },
-      { type: "resorts", count: resortCount },
-      { type: "villas", count: villaCount },
-      { type: "cabins", count: cabinCount },
-    ]
+    const list = await Promise.all(
+      params.map((city) => {
+        return HotelModel.countDocuments({ city: city });
+      })
+    );
+
+  return list;
 }
