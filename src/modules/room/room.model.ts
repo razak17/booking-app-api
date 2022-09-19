@@ -14,8 +14,11 @@ export class Room extends TimeStamps {
   @prop({ required: true })
   public maxPeople: number;
 
-  @prop({ required: true })
-  public roomNumbers: { number: number; unavailableDates: { type: Date[] } }[];
+  @prop()
+  public roomNumbers: {
+    number: number;
+    unavailableDates?: Date[]
+  }[];
 }
 
 export const RoomModel = getModelForClass(Room, {

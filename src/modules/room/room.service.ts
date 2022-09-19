@@ -2,12 +2,13 @@ import { HotelModel } from "../hotel/hotel.model";
 import { Room, RoomModel } from "./room.model";
 
 export const createRoom = async (room: Room, hotelId: string) => {
-  const newRoom = new RoomModel(room);
-  const savedRoom = await newRoom.save();
+  const newRoom = await RoomModel.create(room);
 
-  return await HotelModel.findByIdAndUpdate(hotelId, {
-    $push: { rooms: savedRoom._id },
+  await HotelModel.findByIdAndUpdate(hotelId, {
+    $addToSet: { rooms: newRoom._id.toString() },
   });
+
+  return newRoom;
 };
 
 export async function updateRoom(
@@ -15,7 +16,7 @@ export async function updateRoom(
   update: object,
   options: object
 ) {
-  return RoomModel.findByIdAndUpdate(roomId, { $set: update }, options);
+  return await RoomModel.findByIdAndUpdate(roomId, { $set: update }, options);
 }
 
 export async function updateRoomAvailability(roomId: string, dates: Date[]) {
@@ -32,9 +33,8 @@ export async function updateRoomAvailability(roomId: string, dates: Date[]) {
 
 export async function deleteRoom(roomId: string, hotelId: string) {
   await RoomModel.findByIdAndDelete(roomId);
-  return await HotelModel.findByIdAndUpdate(hotelId, {
-    $pull: { rooms: roomId },
-  });
+  await HotelModel.findByIdAndUpdate(hotelId, { $pull: { rooms: roomId } });
+  return;
 }
 
 export async function getRoomById(roomId: string) {

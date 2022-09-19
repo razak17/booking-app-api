@@ -8,7 +8,7 @@ export async function createUser(user: User) {
 }
 
 export async function findUserByEmail(email: User["email"]) {
-  return UserModel.findOne({ email });
+  return await UserModel.findOne({ email });
 }
 
 export async function updateUser(
@@ -16,17 +16,17 @@ export async function updateUser(
   update: object,
   options: object
 ) {
-  return UserModel.findByIdAndUpdate(userId, { $set: update }, options);
+  return await UserModel.findByIdAndUpdate(userId, { $set: update }, options);
 }
 
 export async function deleteUser(userId: string) {
-  return UserModel.findByIdAndDelete(userId);
+  return await UserModel.findByIdAndDelete(userId);
 }
 
 export async function getUserById(userId: string) {
-  return UserModel.findById(userId);
+  return await UserModel.findById(userId);
 }
 
 export async function getAllUsers() {
-  return UserModel.find();
+  return await UserModel.find();
 }

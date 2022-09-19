@@ -32,7 +32,6 @@ export const updateRoomHandler = async (req: Request, res: Response) => {
       { ...req.body },
       { new: true }
     );
-
     return res.status(StatusCodes.OK).json(updatedRoom);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
@@ -47,8 +46,8 @@ export const updateRoomAvailabilityHandler = async (
   const { dates } = req.body;
 
   try {
-    const updatedRoom = await updateRoomAvailability(roomId, dates);
-    return res.status(StatusCodes.OK).json(updatedRoom);
+    await updateRoomAvailability(roomId, dates);
+    return res.status(StatusCodes.OK).json("Room status has been updated.");
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }

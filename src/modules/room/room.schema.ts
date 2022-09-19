@@ -8,11 +8,8 @@ export const createRoomSchema = {
     maxPeople: number({ required_error: "maxPeople is required" }),
     roomNumbers: object({
       number: number({ required_error: "number is required" }),
-      unavailableDates: object({
-        type: date({
-          required_error: "unavailableDates type is required",
-        }).array(),
-      }),
+      unavailableDates: date({
+      }).array().optional(),
     }).array(),
   }),
   params: object({

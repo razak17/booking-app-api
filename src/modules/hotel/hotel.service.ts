@@ -12,19 +12,19 @@ export async function updateHotel(
   update: object,
   options: object
 ) {
-  return HotelModel.findByIdAndUpdate(HotelId, { $set: update }, options);
+  return await HotelModel.findByIdAndUpdate(HotelId, { $set: update }, options);
 }
 
 export async function deleteHotel(HotelId: string) {
-  return HotelModel.findByIdAndDelete(HotelId);
+  return await HotelModel.findByIdAndDelete(HotelId);
 }
 
 export async function getHotelById(HotelId: string) {
-  return HotelModel.findById(HotelId);
+  return await HotelModel.findById(HotelId);
 }
 
 export async function getAllHotels() {
-  return HotelModel.find();
+  return await HotelModel.find();
 }
 
 export async function getHotelCountByCity(cities: string[]) {
