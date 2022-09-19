@@ -17,6 +17,21 @@ export async function updateRoom(
   return RoomModel.findByIdAndUpdate(roomId, { $set: update }, options);
 }
 
+export async function updateRoomAvailability(
+  roomId: string,
+  dates: Date[],
+) {
+    const updatedRoom = await RoomModel.updateOne(
+      { "roomNumbers._id": roomId },
+      {
+        $push: {
+          "roomNumbers.$.unavailableDates": dates
+        },
+      }
+    );
+  return updatedRoom;
+}
+
 export async function deleteRoom(HotelId: string) {
   return RoomModel.findByIdAndDelete(HotelId);
 }
