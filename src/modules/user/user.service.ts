@@ -19,3 +19,7 @@ export async function updateUser(
 export async function deleteUser(userId: string) {
   return UserModel.findByIdAndDelete(userId);
 }
+
+export async function getUserById(userId: string) {
+  return UserModel.findById(userId);
+}

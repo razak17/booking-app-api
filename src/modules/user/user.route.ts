@@ -2,7 +2,7 @@ import express from "express";
 import requireAdmin from "src/middleware/requireAdmin";
 import requireUser from "src/middleware/requireUser";
 import { processRequestBody } from "zod-express-middleware";
-import { deleteUserHandler, updateUserHandler } from "./user.controller";
+import { deleteUserHandler, getUserHandler, updateUserHandler } from "./user.controller";
 
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.delete("/:id", requireUser, deleteUserHandler);
 router.get("/:id", requireUser, getUserHandler);
 
 // Get all users
-router.get("/", requireAdmin, getUsersHandler);
+router.get("/", requireAdmin, getAllUsersHandler);
 
 
 
