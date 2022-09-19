@@ -18,6 +18,6 @@ export class Room extends TimeStamps {
   public roomNumbers: { number: number; unavailableDates: { type: Date[] } }[];
 }
 
-export const RoomModel = getModelForClass(User, {
+export const RoomModel = getModelForClass(Room, {
   schemaOptions: { timestamps: true },
 });
