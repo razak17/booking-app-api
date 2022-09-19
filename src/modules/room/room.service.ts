@@ -35,8 +35,8 @@ export async function deleteRoom(roomId: string, hotelId: string) {
   });
 }
 
-export async function getRoomById(HotelId: string) {
-  return RoomModel.findById(HotelId);
+export async function getRoomById(roomId: string) {
+  return RoomModel.findById(roomId);
 }
 
 export async function getAllRooms() {

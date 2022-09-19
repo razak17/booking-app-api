@@ -4,6 +4,8 @@ import { processRequestBody } from "zod-express-middleware";
 import { createRoomSchema } from "./room.schema";
 import {
   createRoomHandler,
+  deleteRoomHandler,
+  getRoomHandler,
   updateRoomAvailabilityHandler,
   updateRoomHandler,
 } from "./room.controller";
@@ -28,7 +30,7 @@ router.delete("/:roomId/:hotelId", requireAdmin, deleteRoomHandler);
 //Get
 router.get("/:roomId", getRoomHandler);
 
-//Get all hotels
+//Get all rooms
 router.get("/", getAllRoomsHandler);
 
 export default router;

@@ -8,6 +8,7 @@ dotenv.config();
 import userRoute from "./modules/user/user.route";
 import authRoute from "./modules/auth/auth.route";
 import hotelRoute from "./modules/hotel/hotel.route";
+import roomRoute from "./modules/room/room.route";
 import deserializeUser from "./middleware/deserializeUser";
 
 const main = async () => {
@@ -31,6 +32,7 @@ const main = async () => {
   app.use("/api/v1/users", userRoute);
   app.use("/api/v1/auth", authRoute);
   app.use("/api/v1/hotel", hotelRoute);
+  app.use("/api/v1/room", roomRoute);
 
   app.listen(port, async () => {
     console.log(`server started on http://localhost:${port}`);
