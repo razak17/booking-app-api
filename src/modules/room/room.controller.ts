@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { CreateRoomBody, CreateRoomParams } from "./room.schema";
-import { createRoom, updateRoom, updateRoomAvailability } from "./room.service";
+import {
+  createRoom,
+  deleteRoom,
+  updateRoom,
+  updateRoomAvailability,
+} from "./room.service";
 
 export const createRoomHandler = async (
   req: Request<CreateRoomParams, {}, CreateRoomBody>,
@@ -32,23 +37,26 @@ export const updateRoomHandler = async (req: Request, res: Response) => {
   }
 };
 
-export const updateRoomAvailabilityHandler = async (req: Request, res: Response) => {
+export const updateRoomAvailabilityHandler = async (
+  req: Request,
+  res: Response
+) => {
   const { roomId } = req.params;
   const { dates } = req.body;
 
   try {
-    const updatedRoom = await updateRoomAvailability( roomId, dates);
+    const updatedRoom = await updateRoomAvailability(roomId, dates);
     return res.status(StatusCodes.OK).json(updatedRoom);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
 };
 
-export const deleteHotelHandler = async (req: Request, res: Response) => {
+export const deleteRoomHandler = async (req: Request, res: Response) => {
   try {
-    const { hotelId } = req.params;
-    await deleteHotel(hotelId);
-    return res.status(StatusCodes.OK).send("Hotel has been deleted.");
+    const { hotelId, roomId } = req.params;
+    await deleteRoom(roomId, hotelId);
+    return res.status(StatusCodes.OK).send("Room has been deleted.");
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
@@ -78,30 +86,3 @@ export async function getAllHotelsHandler(req: Request, res: Response) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
 }
-
-export async function hotelsCountByCityHandler(req: Request, res: Response) {
-  const cities = req.query.cities;
-
-  try {
-    const hotels = await getHotelCountByCity(cities as string);
-    if (!hotels) {
-      return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
-    }
-    return res.status(StatusCodes.OK).json(hotels);
-  } catch (e) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
-  }
-}
-
-export async function hotelsCountByTypeHandler(req: Request, res: Response) {
-  try {
-    const hotels = await getHotelCountByType();
-    if (!hotels) {
-      return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
-    }
-    return res.status(StatusCodes.OK).json(hotels);
-  } catch (e) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
-  }
-}
-

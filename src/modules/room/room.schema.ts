@@ -9,9 +9,11 @@ export const createRoomSchema = {
     roomNumbers: object({
       number: number({ required_error: "number is required" }),
       unavailableDates: object({
-        type: date({ required_error: "unavailableDates type is required" }).array()
-      })
-    }).array()
+        type: date({
+          required_error: "unavailableDates type is required",
+        }).array(),
+      }),
+    }).array(),
   }),
   params: object({
     hotelId: string(),
@@ -19,4 +21,3 @@ export const createRoomSchema = {
 };
 export type CreateRoomBody = TypeOf<typeof createRoomSchema.body>;
 export type CreateRoomParams = TypeOf<typeof createRoomSchema.params>;
-
