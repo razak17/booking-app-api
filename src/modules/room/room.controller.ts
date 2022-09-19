@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { CreateRoomBody, CreateRoomParams } from "./room.schema";
-import { createRoom } from "./room.service";
+import { createRoom, updateRoom } from "./room.service";
 
 export const createRoomHandler = async (
   req: Request<CreateRoomParams, {}, CreateRoomBody>,
@@ -16,17 +16,17 @@ export const createRoomHandler = async (
   }
 };
 
-export const updateHotelHandler = async (req: Request, res: Response) => {
-  const { hotelId } = req.params;
+export const updateRoomHandler = async (req: Request, res: Response) => {
+  const { roomId } = req.params;
 
   try {
-    const updatedHotel = await updateHotel(
-      hotelId,
+    const updatedRoom = await updateRoom(
+      roomId,
       { ...req.body },
       { new: true }
     );
 
-    return res.status(StatusCodes.OK).json(updatedHotel);
+    return res.status(StatusCodes.OK).json(updatedRoom);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
