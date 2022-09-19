@@ -44,7 +44,7 @@ export async function loginHandler(
       .send("Invalid email or password");
   }
 
-  const { password, isAdmin, __v, ...rest } = user._doc;
+  const { password, __v, ...rest } = user._doc;
   const jwt = signJwt(rest);
 
   res.cookie(COOKIE_NAME, jwt, {

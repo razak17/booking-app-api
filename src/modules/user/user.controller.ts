@@ -14,7 +14,6 @@ export const updateUserHandler = async (
 ) => {
   const { userId } = req.params;
 
-  console.log(res.locals.user._id)
   if (userId !== res.locals.user._id) {
     return res.status(StatusCodes.UNAUTHORIZED).send("Unauthorized");
   }
@@ -54,8 +53,7 @@ export async function getUserHandler(req: Request, res: Response) {
     if (!user) {
       return res.status(StatusCodes.NOT_FOUND).send("User not found.");
     }
-
-    const { password, ...rest } = user;
+    const { password, __v, ...rest } = user._doc;
     return res.status(StatusCodes.OK).json(rest);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
