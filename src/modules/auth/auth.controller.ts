@@ -1,11 +1,27 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { findUserByEmail } from "../user/user.service";
-import { LoginBody } from "./auth.schema";
+import { createUser, findUserByEmail } from "../user/user.service";
+import { LoginBody, RegisterUserBody } from "./auth.schema";
 import { signJwt } from "../../utils/jwt";
 import argon2 from "argon2";
 
 const COOKIE_NAME = "accessToken";
+
+export async function registerHandler(
+  req: Request<{}, {}, RegisterUserBody>,
+  res: Response
+) {
+  try {
+    await createUser({ ...req.body });
+    return res.status(StatusCodes.CREATED).send("user created successfully");
+  } catch (e) {
+    console.log(e);
+    if (e.code === 11000) {
+      return res.status(StatusCodes.CONFLICT).send("User already exists");
+    }
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  }
+}
 
 export async function loginHandler(
   req: Request<{}, {}, LoginBody>,
