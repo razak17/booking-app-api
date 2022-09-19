@@ -16,3 +16,6 @@ export async function updateUser(
   return UserModel.findByIdAndUpdate(userId, { $set: update }, options);
 }
 
+export async function deleteUser(userId: string) {
+  return UserModel.findByIdAndDelete(userId);
+}

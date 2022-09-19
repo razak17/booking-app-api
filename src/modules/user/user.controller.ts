@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { UpdateUserBody, UpdateUserParams } from "./user.schema";
-import { updateUser } from "./user.service";
+import { deleteUser, updateUser } from "./user.service";
 
 export const updateUserHandler = async (
   req: Request<UpdateUserParams, {}, UpdateUserBody>,
@@ -21,6 +21,21 @@ export const updateUserHandler = async (
     );
 
     return res.status(StatusCodes.OK).json(updatedUser);
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  }
+};
+
+export const deleteUserHandler = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+
+  if (userId !== res.locals.user._id) {
+    return res.status(StatusCodes.UNAUTHORIZED).send("Unauthorized.");
+  }
+
+  try {
+    await deleteUser(userId);
+    return res.status(StatusCodes.OK).send("User deleted.");
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }

@@ -2,7 +2,7 @@ import express from "express";
 import requireAdmin from "src/middleware/requireAdmin";
 import requireUser from "src/middleware/requireUser";
 import { processRequestBody } from "zod-express-middleware";
-import { updateUserHandler } from "./user.controller";
+import { deleteUserHandler, updateUserHandler } from "./user.controller";
 
 const router = express.Router();
 
