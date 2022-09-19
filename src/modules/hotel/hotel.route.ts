@@ -6,6 +6,7 @@ import {
   deleteHotelHandler,
   getAllHotelsHandler,
   getHotelHandler,
+  hotelsCountByCityHandler,
   updateHotelHandler,
 } from "./hotel.controller";
 import { createHotelSchema } from "./hotel.schema";
@@ -33,7 +34,7 @@ router.get("/find/:hotelId", getHotelHandler);
 router.get("/", getAllHotelsHandler);
 
 //Filter
-router.get("/countByCity", countByCity);
+router.get("/countByCity", hotelsCountByCityHandler);
 router.get("/countByType", countByType);
 router.get("/room/:hotelId", getHotelRooms);
 

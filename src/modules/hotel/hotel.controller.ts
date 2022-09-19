@@ -6,6 +6,7 @@ import {
   deleteHotel,
   getAllHotels,
   getHotelById,
+  getHotelCountByCity,
   updateHotel,
 } from "./hotel.service";
 
@@ -63,6 +64,18 @@ export async function getHotelHandler(req: Request, res: Response) {
 export async function getAllHotelsHandler(req: Request, res: Response) {
   try {
     const hotels = await getAllHotels();
+    if (!hotels) {
+      return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
+    }
+    return res.status(StatusCodes.OK).json(hotels);
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  }
+}
+
+export async function hotelsCountByCityHandler(req: Request, res: Response) {
+  try {
+    const hotels = await getHotelCountByCity();
     if (!hotels) {
       return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
     }
