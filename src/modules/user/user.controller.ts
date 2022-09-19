@@ -55,7 +55,7 @@ export async function getUserHandler(req: Request, res: Response) {
     }
 
     const { password, ...rest } = user;
-    return res.status(StatusCodes.OK).send(rest);
+    return res.status(StatusCodes.OK).json(rest);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
@@ -67,7 +67,7 @@ export async function getAllUsersHandler(req: Request, res: Response) {
     if (!users) {
       return res.status(StatusCodes.NOT_FOUND).send("Users not found.");
     }
-    return res.status(StatusCodes.OK).send(users);
+    return res.status(StatusCodes.OK).json(users);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }

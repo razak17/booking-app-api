@@ -1,7 +1,7 @@
 import express from "express";
 import requireAdmin from "../../middleware/requireAdmin";
 import { processRequestBody } from "zod-express-middleware";
-import { createHotelHandler, deleteHotelHandler, updateHotelHandler } from "./hotel.controller";
+import { createHotelHandler, deleteHotelHandler, getAllHotelsHandler, getHotelHandler, updateHotelHandler } from "./hotel.controller";
 import { createHotelSchema } from "./hotel.schema";
 
 const router = express.Router();
@@ -16,10 +16,7 @@ router.put("/:hotelId", requireAdmin, updateHotelHandler);
 router.delete("/:hotelId", requireAdmin, deleteHotelHandler);
 
 //Get
-router.get("/find/:hotelId", getHotel);
-
-//Get all
-router.get("/", getHotels);
+router.get("/find/:hotelId", getHotelHandler);
 
 //Filter
 router.get("/countByCity", countByCity);

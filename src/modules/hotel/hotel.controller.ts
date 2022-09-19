@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { createHotelBody } from "./hotel.schema";
-import { createHotel, deleteHotel, updateHotel } from "./hotel.service";
+import { createHotel, deleteHotel, getAllHotels, getHotelById, updateHotel } from "./hotel.service";
 
 export const createHotelHandler = async (
   req: Request<{}, {}, createHotelBody>,
@@ -46,3 +46,17 @@ export const deleteHotelHandler = async (
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }
 };
+
+export async function getHotelHandler(req: Request, res: Response) {
+  const { hotelId } = req.params;
+  try {
+    const hotel = await getHotelById(hotelId);
+    if (!hotel) {
+      return res.status(StatusCodes.NOT_FOUND).send("Hotel not found.");
+    }
+    return res.status(StatusCodes.OK).send(hotel);
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  }
+}
+  }
