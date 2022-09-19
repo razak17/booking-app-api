@@ -37,6 +37,6 @@ router.get("/", getAllHotelsHandler);
 //Filter
 router.get("/countByCity", hotelsCountByCityHandler);
 router.get("/countByType", hotelsCountByTypeHandler);
-router.get("/room/:hotelId", getHotelRooms);
+// router.get("/room/:hotelId", hotelRoomsHandler);
 
 export default router;

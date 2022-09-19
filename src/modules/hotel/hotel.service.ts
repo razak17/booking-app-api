@@ -27,27 +27,29 @@ export async function getAllHotels() {
 export async function getHotelCountByCity(cities: string) {
   const params = cities.split(",");
 
-    const list = await Promise.all(
-      params.map((city) => {
-        return HotelModel.countDocuments({ city: city });
-      })
-    );
+  const list = await Promise.all(
+    params.map((city) => {
+      return HotelModel.countDocuments({ city: city });
+    })
+  );
 
   return list;
 }
 
 export async function getHotelCountByType() {
-    const hotelCount = await HotelModel.countDocuments({ type: "hotel" });
-    const apartmentCount = await HotelModel.countDocuments({ type: "apartment" });
-    const resortCount = await HotelModel.countDocuments({ type: "resort" });
-    const villaCount = await HotelModel.countDocuments({ type: "villa" });
-    const cabinCount = await HotelModel.countDocuments({ type: "cabin" });
+  const hotelCount = await HotelModel.countDocuments({ type: "hotel" });
+  const apartmentCount = await HotelModel.countDocuments({ type: "apartment" });
+  const resortCount = await HotelModel.countDocuments({ type: "resort" });
+  const villaCount = await HotelModel.countDocuments({ type: "villa" });
+  const cabinCount = await HotelModel.countDocuments({ type: "cabin" });
 
   return [
-      { type: "hotel", count: hotelCount },
-      { type: "apartments", count: apartmentCount },
-      { type: "resorts", count: resortCount },
-      { type: "villas", count: villaCount },
-      { type: "cabins", count: cabinCount },
-    ]
+    { type: "hotel", count: hotelCount },
+    { type: "apartments", count: apartmentCount },
+    { type: "resorts", count: resortCount },
+    { type: "villas", count: villaCount },
+    { type: "cabins", count: cabinCount },
+  ];
 }
+
+export async function getHotelRooms() {}

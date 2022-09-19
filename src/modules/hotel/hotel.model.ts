@@ -26,7 +26,7 @@ export class Hotel extends TimeStamps {
   @prop({ required: true })
   public desc: string;
 
-  @prop({ required: true })
+  @prop({ required: true, min: 0, max: 5 })
   public rating: number;
 
   @prop()
