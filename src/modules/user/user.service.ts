@@ -4,8 +4,7 @@ import argon2 from "argon2";
 export async function createUser(user: User) {
   const hash = await argon2.hash(user.password);
   const newUser = new UserModel({ ...user, password: hash });
-  const savedUser = await newUser.save();
-  return savedUser;
+  return await newUser.save();
 }
 
 export async function findUserByEmail(email: User["email"]) {
