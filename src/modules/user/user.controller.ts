@@ -14,6 +14,7 @@ export const updateUserHandler = async (
 ) => {
   const { userId } = req.params;
 
+  console.log(res.locals.user._id)
   if (userId !== res.locals.user._id) {
     return res.status(StatusCodes.UNAUTHORIZED).send("Unauthorized");
   }

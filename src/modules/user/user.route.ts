@@ -19,17 +19,17 @@ router.get("/me", (_, res) => {
 
 // Update user
 router.put(
-  "/:id",
+  "/:userId",
   processRequestBody(updateUserSchema.body),
   requireUser,
   updateUserHandler
 );
 
 // Delete user
-router.delete("/:id", requireUser, deleteUserHandler);
+router.delete("/:userId", requireUser, deleteUserHandler);
 
 // Get user
-router.get("/:id", requireUser, getUserHandler);
+router.get("/:userId", requireUser, getUserHandler);
 
 // Get all users
 router.get("/", requireAdmin, getAllUsersHandler);
