@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { UpdateUserBody, UpdateUserParams } from "./user.schema";
-import { deleteUser, getUserById, updateUser } from "./user.service";
+import { deleteUser, getAllUsers, getUserById, updateUser } from "./user.service";
 
 export const updateUserHandler = async (
   req: Request<UpdateUserParams, {}, UpdateUserBody>,
@@ -51,6 +51,19 @@ export async function getUserHandler(req: Request, res: Response) {
 
     const {password, ...rest} = user;
     return res.status(StatusCodes.OK).send(rest);
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  }
+}
+
+
+export async function getAllUsersHandler(req: Request, res: Response) {
+  try {
+    const users = await getAllUsers();
+    if (!users) {
+      return res.status(StatusCodes.NOT_FOUND).send("Users not found.");
+    }
+    return res.status(StatusCodes.OK).send(users);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
   }

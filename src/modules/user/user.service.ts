@@ -23,3 +23,7 @@ export async function deleteUser(userId: string) {
 export async function getUserById(userId: string) {
   return UserModel.findById(userId);
 }
+
+export async function getAllUsers() {
+  return UserModel.find();
+}
