@@ -31,8 +31,8 @@ const main = async () => {
   app.use(deserializeUser);
   app.use("/api/v1/users", userRoute);
   app.use("/api/v1/auth", authRoute);
-  app.use("/api/v1/hotel", hotelRoute);
-  app.use("/api/v1/room", roomRoute);
+  app.use("/api/v1/hotels", hotelRoute);
+  app.use("/api/v1/rooms", roomRoute);
 
   app.listen(port, async () => {
     console.log(`server started on http://localhost:${port}`);

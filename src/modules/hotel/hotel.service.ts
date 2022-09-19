@@ -1,8 +1,10 @@
 import { RoomModel } from "../room/room.model";
 import { Hotel, HotelModel } from "./hotel.model";
 
-export const createHotel = (hotel: Hotel) => {
-  return HotelModel.create(hotel);
+export const createHotel = async (hotel: Hotel) => {
+  const { city, ...others } = hotel;
+  const newHotel = new HotelModel({ ...others, city: city.toLowerCase() });
+  return await newHotel.save();
 };
 
 export async function updateHotel(
@@ -25,12 +27,10 @@ export async function getAllHotels() {
   return HotelModel.find();
 }
 
-export async function getHotelCountByCity(cities: string) {
-  const params = cities.split(",");
-
+export async function getHotelCountByCity(cities: string[]) {
   const list = await Promise.all(
-    params.map((city) => {
-      return HotelModel.countDocuments({ city: city });
+    cities.map((city) => {
+      return HotelModel.countDocuments({ city: city.toLowerCase() });
     })
   );
 

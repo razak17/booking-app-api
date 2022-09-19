@@ -76,10 +76,11 @@ export async function getAllHotelsHandler(req: Request, res: Response) {
 }
 
 export async function hotelsCountByCityHandler(req: Request, res: Response) {
-  const cities = req.query.cities;
+  const cities = req.query.cities as string;
+  const cityTags = cities.split(",");
 
   try {
-    const hotels = await getHotelCountByCity(cities as string);
+    const hotels = await getHotelCountByCity(cityTags);
     if (!hotels) {
       return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
     }
