@@ -4,7 +4,7 @@ import { createHotelBody } from "./hotel.schema";
 import {
   createHotel,
   deleteHotel,
-  getAllHotels,
+  getHotels,
   getHotelById,
   getHotelCountByCity,
   getHotelCountByType,
@@ -63,9 +63,12 @@ export async function getHotelHandler(req: Request, res: Response) {
   }
 }
 
-export async function getAllHotelsHandler(req: Request, res: Response) {
+export async function getHotelsHandler(
+  req: Request<{}, { min: number; max: number; limit: number }, {}>,
+  res: Response
+) {
   try {
-    const hotels = await getAllHotels();
+    const hotels = await getHotels(req.query);
     if (!hotels) {
       return res.status(StatusCodes.NOT_FOUND).send("Hotels not found.");
     }

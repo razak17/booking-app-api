@@ -4,7 +4,7 @@ import { processRequestBody } from "zod-express-middleware";
 import {
   createHotelHandler,
   deleteHotelHandler,
-  getAllHotelsHandler,
+  getHotelsHandler,
   getHotelHandler,
   hotelRoomsHandler,
   hotelsCountByCityHandler,
@@ -32,8 +32,8 @@ router.delete("/:hotelId", requireAdmin, deleteHotelHandler);
 //Get
 router.get("/find/:hotelId", getHotelHandler);
 
-//Get all hotels
-router.get("/", getAllHotelsHandler);
+//Get hotels
+router.get("/", getHotelsHandler);
 
 //Filter
 router.get("/countByCity", hotelsCountByCityHandler);

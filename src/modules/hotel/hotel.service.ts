@@ -23,8 +23,14 @@ export async function getHotelById(HotelId: string) {
   return await HotelModel.findById(HotelId);
 }
 
-export async function getAllHotels() {
-  return await HotelModel.find();
+export async function getHotels(query: any) {
+  const { min, max, ...others } = query;
+  console.log({ query, min, max, others });
+  const hotels = await HotelModel.find({
+    ...others,
+    cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+  }).limit(query.limit);
+  return hotels;
 }
 
 export async function getHotelCountByCity(cities: string[]) {
@@ -54,7 +60,7 @@ export async function getHotelCountByType() {
 }
 
 export async function getHotelRooms(hotelId: string) {
-    const hotel = await HotelModel.findById(hotelId);
+  const hotel = await HotelModel.findById(hotelId);
 
   if (hotel) {
     const list = await Promise.all(
@@ -63,6 +69,6 @@ export async function getHotelRooms(hotelId: string) {
       })
     );
 
-  return list;
+    return list;
   }
 }
