@@ -1,8 +1,8 @@
-import { Hotel, HotelModel } from "./hotel.model"
+import { Hotel, HotelModel } from "./hotel.model";
 
 export const createHotel = (hotel: Hotel) => {
   return HotelModel.create(hotel);
-}
+};
 
 export async function updateHotel(
   HotelId: string,
