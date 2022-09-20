@@ -17,7 +17,7 @@ export class Hotel extends TimeStamps {
   @prop({ required: true })
   public distance: string;
 
-  @prop()
+  @prop({ type: () => [String] })
   public photos: string[];
 
   @prop({ required: true })
@@ -29,7 +29,7 @@ export class Hotel extends TimeStamps {
   @prop({ required: true, min: 0, max: 5 })
   public rating: number;
 
-  @prop()
+  @prop({ type: () => [String] })
   public rooms: string[];
 
   @prop()

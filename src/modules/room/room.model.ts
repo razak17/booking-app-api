@@ -1,26 +1,38 @@
-import { getModelForClass, prop } from "@typegoose/typegoose";
-import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
+import mongoose from "mongoose";
 
-export class Room extends TimeStamps {
-  @prop({ required: true })
-  public title: string;
-
-  @prop({ required: true })
-  public desc: string;
-
-  @prop({ required: true })
-  public price: number;
-
-  @prop({ required: true })
-  public maxPeople: number;
-
-  @prop()
-  public roomNumbers: {
-    number: number;
-    unavailableDates?: Date[]
-  }[];
+export interface RoomInterface {
+  title: string;
+  price: number;
+  maxPeople: number;
+  desc: string;
 }
 
-export const RoomModel = getModelForClass(Room, {
-  schemaOptions: { timestamps: true },
-});
+export interface Room extends RoomInterface, mongoose.Document {
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export const RoomSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    maxPeople: {
+      type: Number,
+      required: true,
+    },
+    desc: {
+      type: String,
+      required: true,
+    },
+    roomNumbers: [{ number: Number, unavailableDates: { type: [Date] } }],
+  },
+  { timestamps: true }
+);
+
+export const RoomModel = mongoose.model<Room>("Room", RoomSchema);
