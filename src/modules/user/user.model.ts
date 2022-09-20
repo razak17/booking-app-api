@@ -8,13 +8,13 @@ export class User extends TimeStamps {
   @prop({ required: true, unique: true })
   public email: string;
 
-  @prop()
+  @prop({ required: true })
   public password: string;
 
-  @prop({ required: true })
+  @prop()
   public country: string;
 
-  @prop({ required: true })
+  @prop()
   public city: string;
 
   @prop()

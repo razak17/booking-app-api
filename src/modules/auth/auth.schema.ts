@@ -26,24 +26,14 @@ export const registerSchema = {
     })
       .min(6, "password must be at least 6 characters long")
       .max(64, "password should not be longer than 64 characters"),
-    country: string({
-      required_error: "country is required",
-    }),
-    city: string({
-      required_error: "city is required",
-    }),
-    img: string({
-      required_error: "img is required",
-    }),
-    phone: string({
-      required_error: "phone is required",
-    }),
+    confirmPassword: string({
+      required_error: "password is required",
+    })
+      .min(6, "password must be at least 6 characters long")
+      .max(64, "password should not be longer than 64 characters"),
     isAdmin: boolean({
       required_error: "isAdmin is required",
-    }),
-    confirmPassword: string({
-      required_error: "confirmPassword is required",
-    }),
+    }).optional(),
   }).refine((data) => data.password === data.confirmPassword, {
     message: "passwords do not match",
     path: ["confirmPassword"],
