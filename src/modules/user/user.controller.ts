@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import omit from "../utils/omit";
+import omit from "../../utils/omit";
 import { UpdateUserBody, UpdateUserParams } from "./user.schema";
 import {
   deleteUser,
