@@ -54,7 +54,7 @@ export async function loginHandler(
     domain: "localhost",
     path: "/",
     sameSite: "strict",
-    secure: false,
+    secure: true,
   });
 
   return res.status(StatusCodes.OK).send(jwt);
