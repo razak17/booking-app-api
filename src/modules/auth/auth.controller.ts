@@ -4,6 +4,7 @@ import { createUser, findUserByEmail } from "../user/user.service";
 import { LoginBody, RegisterUserBody } from "./auth.schema";
 import { signJwt } from "../../utils/jwt";
 import argon2 from "argon2";
+import omit from "../../utils/omit";
 
 const COOKIE_NAME = "accessToken";
 
@@ -44,8 +45,8 @@ export async function loginHandler(
       .send("Invalid email or password");
   }
 
-  const { password, __v, ...rest } = user._doc;
-  const jwt = signJwt(rest);
+  const payload = omit(user.toJSON(), ["password"]);
+  const jwt = signJwt(payload);
 
   res.cookie(COOKIE_NAME, jwt, {
     maxAge: 3.154e10, // 1 year
