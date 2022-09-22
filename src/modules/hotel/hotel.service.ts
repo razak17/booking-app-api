@@ -25,7 +25,6 @@ export async function getHotelById(HotelId: string) {
 
 export async function getHotels(query: any) {
   const { min, max, ...others } = query;
-  console.log({ query, min, max, others });
   const hotels = await HotelModel.find({
     ...others,
     cheapestPrice: { $gt: min | 1, $lt: max || 999 },

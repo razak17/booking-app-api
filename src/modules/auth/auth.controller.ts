@@ -51,10 +51,10 @@ export async function loginHandler(
   res.cookie(COOKIE_NAME, jwt, {
     maxAge: 3.154e10, // 1 year
     httpOnly: true,
-    domain: "localhost",
+    domain: process.env.DOMAIN,
     path: "/",
     sameSite: "strict",
-    secure: true,
+    secure: false,
   });
 
   return res.status(StatusCodes.OK).send(jwt);
