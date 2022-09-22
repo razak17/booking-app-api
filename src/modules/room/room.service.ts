@@ -19,9 +19,9 @@ export async function updateRoom(
   return await RoomModel.findByIdAndUpdate(roomId, { $set: update }, options);
 }
 
-export async function updateRoomAvailability(roomId: string, dates: Date[]) {
+export async function updateRoomAvailability(roomNumberId: string, dates: Date[]) {
   const updatedRoom = await RoomModel.updateOne(
-    { "roomNumbers._id": roomId },
+    { "roomNumbers._id": roomNumberId },
     {
       $push: {
         "roomNumbers.$.unavailableDates": dates,

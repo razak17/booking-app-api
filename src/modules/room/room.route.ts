@@ -23,7 +23,7 @@ router.post(
 
 //Update
 router.put("/:roomId", requireAdmin, updateRoomHandler);
-router.put("/availability/:roomId", updateRoomAvailabilityHandler);
+router.put("/availability/:roomNumberId", updateRoomAvailabilityHandler);
 
 //Delete
 router.delete("/:roomId/:hotelId", requireAdmin, deleteRoomHandler);

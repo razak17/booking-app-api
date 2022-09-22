@@ -42,11 +42,11 @@ export const updateRoomAvailabilityHandler = async (
   req: Request,
   res: Response
 ) => {
-  const { roomId } = req.params;
+  const { roomNumberId } = req.params;
   const { dates } = req.body;
 
   try {
-    await updateRoomAvailability(roomId, dates);
+    await updateRoomAvailability(roomNumberId, dates);
     return res.status(StatusCodes.OK).json("Room status has been updated.");
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
