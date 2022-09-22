@@ -14,12 +14,15 @@ Backend for nextjs booking application
 10. Delete Room
 11. Get Room
 
+Note: Post and push operations can only be performed by and admin user.
+
 ## Technologies used:
 - node
 - express
 - jwt
 - mongoose
 - zod
+
 ## Installation
 
 Make sure you have node and yarn installed.
