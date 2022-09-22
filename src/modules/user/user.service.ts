@@ -1,7 +1,7 @@
 import { User, UserModel } from "./user.model";
 import argon2 from "argon2";
 
-export async function createUser(user: User) {
+export async function createUser(user: Omit<User, | "country" | "city" | "img" | "phone">) {
   const hash = await argon2.hash(user.password);
   const newUser = new UserModel({ ...user, password: hash });
   return await newUser.save();

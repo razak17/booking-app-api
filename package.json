@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "tsnd --exit-child --transpile-only src/app.ts",
     "build": "tsc",
+    "start": "node ./dist/app.js",
     "lint": "eslint_d --ext .js,.ts,.jsx,.tsx src/",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },

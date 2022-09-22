@@ -33,7 +33,7 @@ export const registerSchema = {
       .max(64, "password should not be longer than 64 characters"),
     isAdmin: boolean({
       required_error: "isAdmin is required",
-    }).optional(),
+    })
   }).refine((data) => data.password === data.confirmPassword, {
     message: "passwords do not match",
     path: ["confirmPassword"],
