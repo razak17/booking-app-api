@@ -13,7 +13,7 @@ export const createHotelSchema = {
     rating: number({ required_error: "rating is required" }),
     cheapestPrice: number({ required_error: "cheapestPrice is required" }),
     rooms: string({ required_error: "distance is required" }).array(),
-    featured: boolean({ required_error: "featured is required" }).optional(),
+    featured: boolean({ required_error: "featured is required" })
   }),
 };
 
