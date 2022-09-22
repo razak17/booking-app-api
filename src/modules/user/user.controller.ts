@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import omit from "../utils/omit";
 import { UpdateUserBody, UpdateUserParams } from "./user.schema";
 import {
   deleteUser,
@@ -53,7 +54,8 @@ export async function getUserHandler(req: Request, res: Response) {
     if (!user) {
       return res.status(StatusCodes.NOT_FOUND).send("User not found.");
     }
-    const { password, __v, ...rest } = user._doc;
+    // const { password, __v, ...rest } = user._doc;
+    const rest = omit(user.toJSON(), ["password"]);
     return res.status(StatusCodes.OK).json(rest);
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);

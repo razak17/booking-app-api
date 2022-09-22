@@ -1,7 +1,7 @@
 import { HotelModel } from "../hotel/hotel.model";
 import { Room, RoomModel } from "./room.model";
 
-export const createRoom = async (room: Room, hotelId: string) => {
+export const createRoom = async (room: Omit<Room, 'createdAt' | 'updatedAt'>, hotelId: string) => {
   const newRoom = await RoomModel.create(room);
 
   await HotelModel.findByIdAndUpdate(hotelId, {

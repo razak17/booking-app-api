@@ -7,7 +7,7 @@ export interface RoomInterface {
   desc: string;
 }
 
-export interface Room extends RoomInterface, mongoose.Document {
+export interface Room extends RoomInterface, Pick<mongoose.Document, "_id" | "__v"> {
   createdAt: Date;
   updatedAt: Date;
 }
