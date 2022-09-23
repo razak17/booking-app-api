@@ -15,12 +15,12 @@ export async function registerHandler(
   try {
     await createUser({ ...req.body });
     return res.status(StatusCodes.CREATED).send("user created successfully");
-  } catch (e) {
-    console.log(e);
-    if (e.code === 11000) {
+  } catch (err) {
+    console.log(err);
+    if (err.code === 11000) {
       return res.status(StatusCodes.CONFLICT).send("User already exists");
     }
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err.message);
   }
 }
 
@@ -51,6 +51,7 @@ export async function loginHandler(
   res.cookie(COOKIE_NAME, jwt, {
     maxAge: 3.154e10, // 1 year
     httpOnly: true,
+    domain: process.env.DOMAIN as string,
     sameSite: "strict",
     secure: true,
   });
