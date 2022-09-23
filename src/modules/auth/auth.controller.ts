@@ -52,6 +52,7 @@ export async function loginHandler(
     maxAge: 3.154e10, // 1 year
     httpOnly: true,
     domain: process.env.DOMAIN as string,
+    sameSite: "none",
     secure: true,
   });
 
