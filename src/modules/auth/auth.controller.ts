@@ -52,9 +52,8 @@ export async function loginHandler(
     maxAge: 3.154e10, // 1 year
     httpOnly: true,
     domain: process.env.DOMAIN as string,
-    path: "/",
     sameSite: "strict",
-    secure: false,
+    secure: true,
   });
 
   return res.status(StatusCodes.OK).send(jwt);
